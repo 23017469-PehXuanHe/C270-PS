@@ -1,0 +1,36 @@
+
+.calculator {
+    width: 300px;
+    display: grid;
+    gap: 5px;
+    /* 3 columns for numbers, 1 column for operators, like your average calculator */ 
+}
+.calculator input {
+    /* input spans all 4 columns */
+    grid-column: span 4;
+    height: 50px;
+    font-size: 20px;
+    text-align: right;
+    padding: 0 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.calculator button {
+    height: 50px;
+    font-size: 18px;
+    border-radius: 7px;
+    cursor: pointer;
+    border: none;
+    /*leave a tip?*/
+    background-color: #007bff; 
+    color: white;
+}
+.operator {
+    /* force the operators to line up in the rightmost column */
+    grid-column: 4; 
+}
+.button-zero {
+    /* make the zero button span 2 columns */
+    grid-column: span 2;
+}

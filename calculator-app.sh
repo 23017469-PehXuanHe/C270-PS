@@ -13,6 +13,7 @@ git clone --depth=1 https://github.com/23017469-PehXuanHe/C270-PS.git tempdir/re
 # Step 4: Move the required files into tempdir
 cp tempdir/repo/index.html tempdir/
 cp tempdir/repo/styles.css tempdir/
+cp tempdir/repo/script.js tempdir/
 
 # Step 5: Create an Nginx configuration file
 echo "Creating Nginx configuration..."
@@ -29,6 +30,10 @@ server {
     location /styles.css {
         root /usr/share/nginx/html;
     }
+
+    location /script.js {
+        root /usr/share/nginx/html;
+    }
 }
 EOL
 
@@ -38,6 +43,7 @@ cat <<EOL > tempdir/Dockerfile
 FROM nginx:latest
 COPY index.html /usr/share/nginx/html/
 COPY styles.css /usr/share/nginx/html/
+COPY script.js /usr/share/nginx/html/
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 5050
 CMD ["nginx", "-g", "daemon off;"]

@@ -13,27 +13,49 @@ cp tempdir/repo/index.html tempdir/
 cp tempdir/repo/styles.css tempdir/static/
 cp tempdir/repo/script.js tempdir/static/
 
-# Step 4: Create Dockerfile
+# Step 4: Create Nginx config
+echo "Creating Nginx configuration..."
+cat <<EOL > tempdir/nginx.conf
+server {
+    listen 80;
+    server_name localhost;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    location / {
+        try_files \$uri \$uri/ =404;
+    }
+
+    location /static/ {
+        root /usr/share/nginx/html;
+        autoindex on;
+    }
+}
+EOL
+
+# Step 5: Create Dockerfile
 echo "Creating Dockerfile..."
 echo "FROM nginx:latest" > tempdir/Dockerfile
 echo "COPY index.html /usr/share/nginx/html/" >> tempdir/Dockerfile
 echo "COPY static /usr/share/nginx/html/static/" >> tempdir/Dockerfile
+echo "COPY nginx.conf /etc/nginx/conf.d/default.conf" >> tempdir/Dockerfile
 echo "EXPOSE 5050" >> tempdir/Dockerfile
 echo "CMD [\"nginx\", \"-g\", \"daemon off;\"]" >> tempdir/Dockerfile
 
-# Step 5: Build the Docker image
+# Step 6: Build the Docker image
 cd tempdir
 docker build -t calculator-app .
 
-# Step 6: Stop and remove any existing container
+# Step 7: Stop and remove any existing container
 docker stop calculator-running 2>/dev/null
 docker rm calculator-running 2>/dev/null
 
-# Step 7: Run the new container on localhost:5050
+# Step 8: Run the new container on localhost:5050
 docker run -t -d -p 5050:80 --name calculator-running calculator-app
 
-# Step 8: Show running containers
+# Step 9: Show running containers
 docker ps -a
 
 echo "Calculator App is running at http://localhost:5050"
+
 

@@ -12,7 +12,7 @@
     font-size: 20px;
     text-align: right;
     padding: 0 10px;
-    background-color: #f9f9f9;
+    background-color: #e00707;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
@@ -23,7 +23,7 @@
     cursor: pointer;
     border: none;
     /*leave a tip?*/
-    background-color: #007bff; 
+    background-color: #ff0000; 
     color: white;
 }
 .operator {

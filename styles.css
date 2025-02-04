@@ -13,7 +13,7 @@
     text-align: right;
     padding: 0 10px;
     background-color: #e00707;
-    border: 1px solid #ccc;
+    border: 1px solid #ff0000;
     border-radius: 5px;
 }
 .calculator button {
@@ -24,7 +24,7 @@
     border: none;
     /*leave a tip?*/
     background-color: #ff0000; 
-    color: white;
+    color: rgb(255, 0, 0);
 }
 .operator {
     /* force the operators to line up in the rightmost column */
